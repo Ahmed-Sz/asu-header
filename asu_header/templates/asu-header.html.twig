@@ -1,0 +1,136 @@
+<header id="asu-header">
+  <div id="wrapper-header-top">
+    <div>
+      <div class="row">
+        <div id="header-top" class="col-12">
+          <nav class="nav" aria-label="Top">
+            <a class="nav-link sr-only sr-only-focusable" href="#skip-to-content">Skip to Content</a>
+            <a class="nav-link sr-only sr-only-focusable"
+              href="http://asu.edu/accessibility/feedback?a11yref=unity-design-system">Report an accessibility
+              problem</a>
+            <a class="nav-link" href="https://asu.edu">ASU Home</a>
+            <a class="nav-link" href="https://my.asu.edu">My ASU</a>
+            <a class="nav-link" href="https://asu.edu/about/colleges-and-schools">Colleges and Schools</a>
+            {% if is_signed_in == "true" %}
+            <div class="nav-link login-status">
+              <a class="name" href="{{ sign_in_url }}users/{{ user }}">{{ user }}</a>
+              <a class="signout" href="{{ sign_out_url }}">Sign Out</a>
+            </div>
+            {% else %}
+            <a class="nav-link" href="/cas">Sign In</a>
+            {% endif %}
+            <form class="form-inline mb-0" action="https://search.asu.edu/search" method="get" name="gs">
+              <input class="form-control" type="search" name="q" aria-labelledby="header-top-search" required="">
+              <label id="header-top-search">Search ASU</label>
+              <input name="site" value="default_collection" type="hidden">
+              <input name="sort" value="date:D:L:d1" type="hidden">
+              <input name="output" value="xml_no_dtd" type="hidden">
+              <input name="ie" value="UTF-8" type="hidden">
+              <input name="oe" value="UTF-8" type="hidden">
+              <input name="client" value="asu_frontend" type="hidden">
+              <input name="proxystylesheet" value="asu_frontend" type="hidden">
+            </form>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="wrapper-header-main">
+    <div class="container-xl">
+      <div class="row">
+        <div id="header-main" class="col-12">
+          <nav class="navbar navbar-expand-xl" aria-label="Main">
+            <a class="navbar-brand" href="https://www.asu.edu/">
+              <img class="vert" src="{{ logo }}" alt="Arizona State University">
+              <img class="horiz" src="{{ logohor }}" alt="Arizona State University">
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#menubar"
+              aria-controls="menubar" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa fa-bars fa-w-14" aria-hidden="true"></i>
+              <span title="Close mobile menu" class="fa-stack">
+                <i class="fa fa-circle fa-w-16 fa-stack-2x" aria-hidden="true"></i>
+                <i class="fa fa-times fa-w-11 fa-stack-1x" aria-hidden="true"></i>
+              </span>
+            </button>
+            <div class="navbar-container">
+              <div class="title subdomain-name">
+                <a href="/">{{ sitename }}</a>
+              </div>
+              <div class="navbar-collapse w-100 justify-content-between collapse" id="menubar">
+                <!-- Top level navigation loop starts here -->
+                <div class="navbar-nav">
+                  {% for items in menuitems %}
+                    <!-- If nav is home -->
+                    {% if items.title == 'Home' %}
+                      <a class="nav-link nav-link-home menu-link" href="{{ items.path }}">
+                        <span class="fa fa-home icon-white"></span>
+                      </a>
+                    <!-- If nav is a dropdown menu -->
+                    {% else %}
+                      <!-- Proceed if there is no btn class for menu items-->
+                      <!-- no-break-class is the default class provided by 
+                            menu-link attributes module for each menu link -->
+                      {% if "no-break-class" in items %}
+                        {% if items.children %}
+                          <div class="nav-item menu-item dropdown">
+                              <a class="nav-link menu-link" href="{{ items.path }}" id="{{ items.class }}" role="button"
+                              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ items.title }}
+                                <span class="fa fa-chevron-down menu-link" id="{{ items.class }}"></span>
+                              </a>
+                                <div class="dropdown-menu" aria-labelledby="{{ items.class }}">
+                                  <!-- if one col add only 1  -->
+                                  <div class="dropdown-col">
+                                    {% for submenu in items.children %}
+                                      <a href="{{ submenu.path }}"
+                                      class="text-dark dropdown-item d-flex"><span>{{ submenu.title }}</span></a>
+                                      {% for link in submenu.children %}
+                                        <a class="dropdown-item" href="{{ link.path }}"><span>{{ link.title }}</span></a>
+                                      {% endfor %}
+                                    {% endfor %}
+                                  </div>
+                                </div>
+                          </div>
+                        <!-- if nav  is not having any dropdown items -->
+                        {% else %}
+                          <a class="nav-link" href="{{ items.path }}">{{items.title}}</a>
+                        {% endif %}
+                      {% endif %}
+                    {% endif %}
+                  {% endfor %}
+                  <div class="navbar-mobile-footer" style="">
+                    <form class="form-inline navbar-mobile-search" action="https://search.asu.edu/search" method="get"
+                      name="gs" data-children-count="1">
+                      <input class="form-control" type="search" name="q" aria-label="Search ASU" placeholder="Search ASU">
+                      <input name="site" value="default_collection" type="hidden">
+                      <input name="sort" value="date:D:L:d1" type="hidden">
+                      <input name="output" value="xml_no_dtd" type="hidden">
+                      <input name="ie" value="UTF-8" type="hidden">
+                      <input name="oe" value="UTF-8" type="hidden">
+                      <input name="client" value="asu_frontend" type="hidden">
+                      <input name="proxystylesheet" value="asu_frontend" type="hidden">
+                    </form>
+                    <div class="nav-grid">
+                      <a class="nav-link" href="https://asu.edu">ASU Home</a>
+                      <a class="nav-link" href="https://my.asu.edu">My ASU</a>
+                      <a class="nav-link" href="https://asu.edu/about/colleges-and-schools">Colleges and Schools</a>
+                      <a class="nav-link" href="https://weblogin.asu.edu/cgi-bin/login">Sign in</a>
+                    </div>
+                  </div>
+                </div>
+                <!-- If there is a button in menu items -->
+                <form class="navbar-site-buttons form-inline">
+                  {% for items in menuitems %}
+                      {% if "nav-button" in items.class.0 %}
+                        <a class="btn btn-md btn-gold" href="{{ items.path }}">{{items.title}}</a>
+                      {% endif %}
+                  {% endfor %}
+                </form>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,5 @@
+services:
+  asu_header.twig.MyTwigExtension:
+    class: Drupal\asu_header\MyTwigExtension
+    tags:
+      - { name: twig.extension }

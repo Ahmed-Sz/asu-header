@@ -1,0 +1,24 @@
+asu-header:
+  version: VERSION
+  css:
+    theme:
+      css/_asu_components/bootstrap/bootstrap.css: {}
+      css/_asu_components/styles.css: {}
+      '//www.asu.edu/asuthemes/4.6/css/asu_header.min.css': { type: external }
+      '//www.asu.edu/asuthemes/4.6/css/asu_header_media.min.css': { type: external }
+      css/ie9.css: { browsers: { IE: 'IE 9', '!IE': false } }
+      css/style.css: {}
+  js:
+    '//www.asu.edu/asuthemes/4.6/js/asu_header.min.js': { type: external }
+    'https://use.fontawesome.com/releases/v5.13.1/js/all.js' : { type: external }
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js': { type: external }
+    'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js': { type: external }
+    'https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js': { type: external }
+
+    js/rfi.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

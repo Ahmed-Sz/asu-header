@@ -1,0 +1,7 @@
+name: ASU Custom Header
+type: module
+description: Contains custom tweeks for ASU Header and footer
+core_version_requirement: ^9
+package: ASU
+libraries:
+  - asu_header/asu-header
